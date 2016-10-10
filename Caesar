@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <cs50.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+ 
+int main (int argc, string argv[])
+{
+   if (argc != 2)
+   {
+      printf("You must enter 1 integer as a command line argument! \n");
+      return 1;
+   }
+   
+   //declare variables
+   string s;
+   int c = 0;
+   int k = atoi(argv[1]);
+   
+      
+   //prompt the user for a string and then store it in s
+   //printf("Please enter a string. \n");
+   s = GetString();
+   
+   int n = strlen(s);
+   
+   
+   //loop through the string
+   for (int i = 0; i < n; i++)
+   {
+      if (isalpha(s[i]))
+      {
+         //if ((s[i] + k) > 90 || (s[i] + k) > 122)
+         if (isupper(s[i]))
+         {
+            if ((s[i] + k) > 90)
+            {        
+               c = (s[i] + k) - 26;
+               while (c > 90)
+               {
+                  c -= 26;
+               }
+               printf("%c", c);
+            }
+            else
+            {
+               c = s[i] + k;                                   
+               printf("%c", c);
+            }   
+         }
+         else if ((s[i] + k) > 122)
+         {
+                     
+            c = (s[i] + k) - 26;
+            
+            while ( c > 122)
+            {
+               c -= 26;   
+            }
+            printf("%c",c);
+         }   
+         else
+         {
+             c = s[i] + k;
+             printf("%c", c);
+         }
+         
+      }
+      else
+      {
+         c = s[i];
+         printf("%c", c);
+      }
+   }
+   
+   printf("\n");
+   
+   return 0;
+}
