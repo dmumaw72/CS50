@@ -1,0 +1,115 @@
+#include <stdio.h>
+#include <cs50.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+ 
+int main (int argc, string argv[])
+{
+   if (argc != 2) 
+   {
+      printf("You must enter 1 alphabetical argument! \n");
+      return 1;
+   }
+   
+   //declare variables
+      
+   string phrase = "";  //phrase entered by user
+   string key = argv[1];  //argument entered at command line after program name
+   int j = strlen(key);   //holds the length of key
+   int m = 0;           //counter variable to be used to cycle through key
+   
+   
+    //for loop for checking if argv[] is all letters and if not then displays message to user and ends the program
+   for (int i = 0; i < j; i++)
+   {
+     
+      if (isalpha(key[i]))
+      {
+         continue;
+      }
+      else
+      {
+         printf("The argument must contain only letters \n");
+         return 1;
+      }
+   }
+    
+   
+   //get an input string from the user
+   
+   //printf("Please enter a phrase to encrypt: ");
+   phrase = GetString();
+   int k = strlen(phrase);     //length of the phrase variable
+   int temp = 0;               //store the temporary key number
+   
+   //convert the key to all uppercase
+   
+   for (int i = 0; i < j; i++)
+   {
+      key[i] = toupper(key[i]);
+   }
+     
+   //iterate over the keyword and encrypt the message
+   
+   for (int i = 0; i < k; i++)
+   {
+      if (m == j) 
+      {
+         m = 0;
+      }
+      
+      if (isalpha(phrase[i])) //check that character is an alphabetical character
+      {
+         if (isupper(phrase[i])) //check is alphabetical character is uppercase
+         {
+            phrase[i] = phrase[i] - 65;
+            temp = key[m] -65;
+            if ((phrase[i] + temp) > 25)
+            {
+               phrase[i] = (phrase[i] + temp) - 26 + 65;
+               printf("%c", phrase[i]);
+               //increment counter for the key
+               m++;    
+            }
+            else
+            {
+               phrase[i] = (phrase[i] + temp) + 65;
+               printf("%c", phrase[i]);
+               //increment counter for the key
+               m++;    
+            }                            
+         }
+         
+         else if (islower(phrase[i]))  //check that character is lowercase
+         {
+            phrase[i] = phrase[i] - 97;
+            temp = key[m] - 65;
+            if ((phrase[i] + temp) > 25)
+            {
+               phrase[i] = (phrase[i] + temp) - 26 + 97;
+               printf("%c", phrase[i]);
+               //increment counter for the key
+               m++;    
+            }
+            else
+            {
+               phrase[i] = (phrase[i] + temp) + 97;
+               printf("%c", phrase[i]);
+               //increment counter for the key
+               m++;    
+            }           
+               
+         }
+         
+      }
+      else
+      {
+         printf("%c", phrase[i]);
+      }       
+      
+      
+         
+   }
+   printf("\n");
+}
